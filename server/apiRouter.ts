@@ -27,57 +27,57 @@ function checkRateLimit(ip: string): boolean {
 export const DOCTORS = [
   {
     id: 'doc-1',
-    name: 'Dr. Priya Sharma',
-    degree: 'MBBS, MD - General Medicine',
-    specialty: 'General Physician',
-    experienceYears: 14,
-    rating: 4.9,
-    reviewCount: 382,
-    location: 'Bandra West, Mumbai',
-    city: 'Mumbai',
-    hospital: 'Apollo Clinic & Lifecare',
-    consultationFee: 700,
-    availableToday: true,
-    nextAvailableSlot: 'Today, 04:30 PM',
-    languages: ['English', 'Hindi', 'Marathi'],
-    avatar: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=300&q=80',
-    tags: ['Fever & Infections', 'Diabetes Care', 'Preventive Health'],
-  },
-  {
-    id: 'doc-2',
     name: 'Dr. Arjun Mehta',
     degree: 'MBBS, MD - Dermatology, Venereology & Leprosy',
     specialty: 'Dermatologist',
-    experienceYears: 11,
-    rating: 4.8,
-    reviewCount: 520,
-    location: 'Koramangala, Bangalore',
+    experienceYears: 12,
+    rating: 4.9,
+    reviewCount: 540,
+    location: 'Koramangala 4th Block, Bangalore',
     city: 'Bangalore',
     hospital: 'Skin & Laser Wellness Center',
     consultationFee: 900,
     availableToday: true,
-    nextAvailableSlot: 'Today, 05:15 PM',
+    nextAvailableSlot: 'Today, 04:30 PM',
     languages: ['English', 'Hindi', 'Kannada'],
     avatar: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=300&q=80',
     tags: ['Acne Treatment', 'Hair Fall', 'Cosmetic Dermatology'],
   },
   {
-    id: 'doc-3',
+    id: 'doc-2',
     name: 'Dr. Ananya Sen',
     degree: 'MBBS, MS - Obstetrics & Gynaecology',
     specialty: 'Gynecologist',
     experienceYears: 16,
     rating: 4.9,
-    reviewCount: 640,
-    location: 'Indiranagar, Bangalore',
+    reviewCount: 680,
+    location: '100ft Road, Indiranagar, Bangalore',
     city: 'Bangalore',
     hospital: 'Fortis La Femme',
     consultationFee: 1000,
-    availableToday: false,
-    nextAvailableSlot: 'Tomorrow, 10:00 AM',
-    languages: ['English', 'Hindi', 'Bengali'],
+    availableToday: true,
+    nextAvailableSlot: 'Today, 05:15 PM',
+    languages: ['English', 'Hindi', 'Bengali', 'Kannada'],
     avatar: 'https://images.unsplash.com/photo-1594824813515-888914c62c95?auto=format&fit=crop&w=300&q=80',
     tags: ['Pregnancy Care', 'PCOS/PCOD', 'Women Health'],
+  },
+  {
+    id: 'doc-3',
+    name: 'Dr. Priya Sharma',
+    degree: 'MBBS, MD - General Medicine',
+    specialty: 'General Physician',
+    experienceYears: 14,
+    rating: 4.85,
+    reviewCount: 420,
+    location: 'HSR Layout Sector 2, Bangalore',
+    city: 'Bangalore',
+    hospital: 'Apollo Clinic',
+    consultationFee: 700,
+    availableToday: true,
+    nextAvailableSlot: 'Today, 06:00 PM',
+    languages: ['English', 'Hindi', 'Kannada'],
+    avatar: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=300&q=80',
+    tags: ['Fever & Infections', 'Diabetes Care', 'Hypertension'],
   },
   {
     id: 'doc-4',
@@ -85,15 +85,15 @@ export const DOCTORS = [
     degree: 'MBBS, MS - Orthopaedics, Fellowship in Joint Replacement',
     specialty: 'Orthopedist',
     experienceYears: 19,
-    rating: 4.7,
-    reviewCount: 290,
-    location: 'South Extension, Delhi',
-    city: 'Delhi NCR',
-    hospital: 'Max Super Speciality Hospital',
-    consultationFee: 1200,
-    availableToday: true,
-    nextAvailableSlot: 'Today, 06:00 PM',
-    languages: ['English', 'Hindi', 'Malayalam'],
+    rating: 4.8,
+    reviewCount: 310,
+    location: 'ITPL Main Road, Whitefield, Bangalore',
+    city: 'Bangalore',
+    hospital: 'Manipal Hospital Whitefield',
+    consultationFee: 1100,
+    availableToday: false,
+    nextAvailableSlot: 'Tomorrow, 10:30 AM',
+    languages: ['English', 'Hindi', 'Malayalam', 'Kannada'],
     avatar: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=300&q=80',
     tags: ['Knee Pain', 'Joint Replacement', 'Sports Injury'],
   },
@@ -104,16 +104,16 @@ export const DOCTORS = [
     specialty: 'Pediatrician',
     experienceYears: 13,
     rating: 4.95,
-    reviewCount: 410,
-    location: 'Gachibowli, Hyderabad',
-    city: 'Hyderabad',
+    reviewCount: 460,
+    location: '4th Block, Jayanagar, Bangalore',
+    city: 'Bangalore',
     hospital: 'Rainbow Children’s Hospital',
     consultationFee: 800,
     availableToday: true,
     nextAvailableSlot: 'Today, 03:45 PM',
-    languages: ['English', 'Hindi', 'Telugu'],
+    languages: ['English', 'Hindi', 'Kannada'],
     avatar: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=300&q=80',
-    tags: ['Child Vaccination', 'Newborn Care', 'Child Growth'],
+    tags: ['Child Vaccination', 'Newborn Care', 'Growth Assessment'],
   },
   {
     id: 'doc-6',
@@ -121,17 +121,17 @@ export const DOCTORS = [
     degree: 'MBBS, DM - Cardiology',
     specialty: 'Cardiologist',
     experienceYears: 22,
-    rating: 4.9,
-    reviewCount: 480,
-    location: 'Shivajinagar, Pune',
-    city: 'Pune',
-    hospital: 'Ruby Hall Clinic',
-    consultationFee: 1500,
+    rating: 4.92,
+    reviewCount: 510,
+    location: 'Margosa Road, Malleshwaram, Bangalore',
+    city: 'Bangalore',
+    hospital: 'Aster CMI Hospital',
+    consultationFee: 1400,
     availableToday: false,
     nextAvailableSlot: 'Tomorrow, 11:30 AM',
-    languages: ['English', 'Hindi', 'Marathi'],
+    languages: ['English', 'Hindi', 'Kannada', 'Marathi'],
     avatar: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=300&q=80',
-    tags: ['Heart Disease', 'ECG / Echo', 'Hypertension'],
+    tags: ['Heart Disease', 'ECG / Echo', 'Preventive Cardiology'],
   },
 ];
 
@@ -307,17 +307,27 @@ apiRouter.get('/health', (_req: Request, res: Response) => {
   });
 });
 
-// GET /api/doctors - Fetch doctor directory
+// GET /api/doctors - Fetch doctor directory (Bangalore active, others coming soon)
 apiRouter.get('/doctors', (req: Request, res: Response) => {
   const { specialty, city, query } = req.query;
-  let filtered = [...DOCTORS];
+  const targetCity = (typeof city === 'string' && city) ? city : 'Bangalore';
+  const isBangalore = targetCity.toLowerCase() === 'bangalore' || targetCity.toLowerCase() === 'all cities';
 
-  if (specialty && typeof specialty === 'string' && specialty !== 'all') {
-    filtered = filtered.filter((d) => d.specialty.toLowerCase() === specialty.toLowerCase());
+  if (!isBangalore) {
+    res.json({
+      success: true,
+      count: 0,
+      citySupported: false,
+      message: `Doctors in ${targetCity} are launching soon! We currently support verified doctors in Bangalore.`,
+      doctors: [],
+    });
+    return;
   }
 
-  if (city && typeof city === 'string' && city !== 'all') {
-    filtered = filtered.filter((d) => d.city.toLowerCase() === city.toLowerCase());
+  let filtered = [...DOCTORS];
+
+  if (specialty && typeof specialty === 'string' && specialty !== 'All Specialties' && specialty !== 'all') {
+    filtered = filtered.filter((d) => d.specialty.toLowerCase() === specialty.toLowerCase());
   }
 
   if (query && typeof query === 'string' && query.trim()) {
@@ -327,11 +337,12 @@ apiRouter.get('/doctors', (req: Request, res: Response) => {
         d.name.toLowerCase().includes(q) ||
         d.specialty.toLowerCase().includes(q) ||
         d.hospital.toLowerCase().includes(q) ||
+        d.location.toLowerCase().includes(q) ||
         d.tags.some((t) => t.toLowerCase().includes(q))
     );
   }
 
-  res.json({ success: true, count: filtered.length, doctors: filtered });
+  res.json({ success: true, count: filtered.length, citySupported: true, doctors: filtered });
 });
 
 // GET /api/lab-tests - Fetch lab test catalog

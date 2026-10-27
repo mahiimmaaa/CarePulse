@@ -22,7 +22,7 @@ import { LoginModal } from './components/Modals/LoginModal.tsx';
 import { Doctor, LabTest, City } from './types/index.ts';
 
 function HealthcareApp() {
-  const [selectedCity, setSelectedCity] = useState<City>('Mumbai');
+  const [selectedCity, setSelectedCity] = useState<City>('Bangalore');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSpecialty, setSelectedSpecialty] = useState('All Specialties');
   const [activeSection, setActiveSection] = useState('home');
@@ -101,6 +101,7 @@ function HealthcareApp() {
           selectedSpecialty={selectedSpecialty}
           onSelectSpecialty={(spec) => setSelectedSpecialty(spec)}
           onBookDoctor={handleBookDoctor}
+          onSwitchToBangalore={() => setSelectedCity('Bangalore')}
         />
 
         {/* Lab Tests & Health Checkups Catalog */}

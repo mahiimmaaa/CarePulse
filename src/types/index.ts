@@ -56,4 +56,4 @@ export interface Appointment {
   createdAt: string;
 }
 
-export type City = 'All Cities' | 'Mumbai' | 'Bangalore' | 'Delhi NCR' | 'Hyderabad' | 'Pune';
+export type City = 'Bangalore' | 'Mumbai' | 'Delhi NCR' | 'Hyderabad' | 'Pune';

@@ -68,9 +68,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto">
           {/* Practo-style pill */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-teal-100/80 dark:bg-teal-950/70 border border-teal-200 dark:border-teal-800 text-teal-800 dark:text-teal-300 text-xs font-semibold mb-6">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-100/80 dark:bg-teal-950/70 border border-teal-200 dark:border-teal-800 text-teal-800 dark:text-teal-300 text-xs font-semibold mb-6">
             <Sparkles className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
-            <span>AI-Powered Medical Discovery & Telehealth</span>
+            <span>Now Live in Bangalore • Other Cities Working Soon</span>
           </div>
 
           {/* Main Headline */}
@@ -84,7 +84,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           {/* Subtitle */}
           <p className="mt-4 sm:mt-5 text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
             Get healthcare information and assistance through our AI health assistant.
-            Find verified doctors, book appointments, and schedule certified lab tests at your doorstep.
+            Find verified doctors across Bangalore (Koramangala, Indiranagar, Whitefield, HSR), book appointments, and schedule certified doorstep lab tests.
           </p>
 
           {/* Prominent Search Bar (Practo style) */}

@@ -35,8 +35,6 @@ export const ChatbotPanel: React.FC = () => {
     error,
     conversationId,
     provider,
-    modelMode,
-    setModelMode,
     openChat,
     closeChat,
     toggleExpand,
@@ -175,39 +173,7 @@ export const ChatbotPanel: React.FC = () => {
             </div>
           </div>
 
-          {/* Model Mode Switcher Bar */}
-          <div className="bg-slate-100 dark:bg-slate-800/90 border-b border-slate-200 dark:border-slate-700/80 px-3 py-1.5 flex items-center justify-between text-xs">
-            <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-              AI Model:
-            </span>
-            <div className="flex items-center gap-1 p-0.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
-              <button
-                type="button"
-                onClick={() => setModelMode('fast')}
-                className={`px-2 py-0.5 rounded-md text-[11px] font-semibold flex items-center gap-1 transition-all cursor-pointer ${
-                  modelMode === 'fast'
-                    ? 'bg-teal-600 text-white shadow-xs'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                }`}
-              >
-                <Zap className="w-3 h-3" />
-                <span>Model 1 (Fast Triage)</span>
-              </button>
 
-              <button
-                type="button"
-                onClick={() => setModelMode('detailed')}
-                className={`px-2 py-0.5 rounded-md text-[11px] font-semibold flex items-center gap-1 transition-all cursor-pointer ${
-                  modelMode === 'detailed'
-                    ? 'bg-teal-600 text-white shadow-xs'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                }`}
-              >
-                <BrainCircuit className="w-3 h-3" />
-                <span>Model 2 (Deep Guide)</span>
-              </button>
-            </div>
-          </div>
 
           {/* Safety Notice Banner */}
           <div className="bg-amber-50 dark:bg-amber-950/40 border-b border-amber-200 dark:border-amber-900/60 px-3 py-1.5 flex items-start gap-2 text-[11px] text-amber-900 dark:text-amber-200">
@@ -273,11 +239,6 @@ export const ChatbotPanel: React.FC = () => {
                             minute: '2-digit',
                           })}
                         </span>
-                        {msg.modelUsed && !isUser && (
-                          <span className="px-1.5 py-0.2 rounded bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-300">
-                            {msg.modelUsed}
-                          </span>
-                        )}
                       </div>
 
                       {!isUser && (
@@ -313,7 +274,7 @@ export const ChatbotPanel: React.FC = () => {
                 </div>
                 <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl rounded-tl-xs px-4 py-3 shadow-sm flex items-center gap-1.5">
                   <span className="text-xs text-slate-500 dark:text-slate-400 mr-1 font-medium">
-                    {modelMode === 'detailed' ? 'Consulting deep medical model...' : 'Consulting triage model...'}
+                    Consulting medical knowledge...
                   </span>
                   <div className="flex items-center gap-1">
                     <div className="w-2 h-2 rounded-full bg-teal-600 animate-bounce [animation-delay:-0.3s]"></div>

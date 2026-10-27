@@ -27,7 +27,7 @@ interface NavbarProps {
   onNavigate: (sectionId: string) => void;
 }
 
-const CITIES: City[] = ['All Cities', 'Mumbai', 'Bangalore', 'Delhi NCR', 'Hyderabad', 'Pune'];
+const CITIES: City[] = ['Bangalore', 'Mumbai', 'Delhi NCR', 'Hyderabad', 'Pune'];
 
 export const Navbar: React.FC<NavbarProps> = ({
   selectedCity,
@@ -62,7 +62,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="flex items-center gap-6">
             <button
               onClick={() => handleNavClick('home')}
-              className="flex items-center gap-2.5 text-left group focus:outline-none"
+              className="flex items-center gap-2.5 text-left group focus:outline-none cursor-pointer"
             >
               <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-600 to-cyan-500 flex items-center justify-center text-white shadow-md shadow-teal-500/20 group-hover:scale-105 transition-transform">
                 <Activity className="w-6 h-6 animate-pulse" />
@@ -72,7 +72,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   CarePulse
                 </span>
                 <span className="block text-[10px] font-medium text-slate-500 dark:text-slate-400 tracking-wider uppercase -mt-1">
-                  Practo Inspired Healthcare
+                  Bangalore Healthcare
                 </span>
               </div>
             </button>
@@ -85,11 +85,20 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 <MapPin className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
                 <span>{selectedCity}</span>
+                {selectedCity === 'Bangalore' ? (
+                  <span className="px-1.5 py-0.2 text-[9px] font-bold rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
+                    Live
+                  </span>
+                ) : (
+                  <span className="px-1.5 py-0.2 text-[9px] font-bold rounded-full bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
+                    Soon
+                  </span>
+                )}
                 <ChevronDown className="w-3 h-3 text-slate-400" />
               </button>
 
               {cityDropdownOpen && (
-                <div className="absolute left-0 mt-1 w-44 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl py-1.5 z-50">
+                <div className="absolute left-0 mt-1 w-52 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl py-1.5 z-50">
                   <div className="px-3 py-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
                     Select City
                   </div>
@@ -106,7 +115,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                           : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700/50'
                       }`}
                     >
-                      {city}
+                      <div className="flex items-center gap-1.5">
+                        <span>{city}</span>
+                        {city === 'Bangalore' ? (
+                          <span className="text-[9px] px-1.5 py-0.2 font-bold rounded-sm bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+                            Active
+                          </span>
+                        ) : (
+                          <span className="text-[9px] px-1.5 py-0.2 font-medium rounded-sm bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400">
+                            Working Soon
+                          </span>
+                        )}
+                      </div>
                       {selectedCity === city && <span className="w-1.5 h-1.5 rounded-full bg-teal-500" />}
                     </button>
                   ))}
@@ -182,10 +202,9 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-6 space-y-3">
-          {/* City selector mobile */}
           <div className="pt-2 pb-1">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-1.5">
-              Select Location
+              Select City
             </span>
             <div className="grid grid-cols-2 gap-1.5">
               {CITIES.map((city) => (
@@ -195,13 +214,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                     onSelectCity(city);
                     setMobileMenuOpen(false);
                   }}
-                  className={`px-3 py-2 text-xs rounded-lg text-left font-medium ${
+                  className={`px-3 py-2 text-xs rounded-lg text-left font-medium flex items-center justify-between ${
                     selectedCity === city
                       ? 'bg-teal-600 text-white'
                       : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200'
                   }`}
                 >
-                  {city}
+                  <span>{city}</span>
+                  {city === 'Bangalore' && (
+                    <span className="text-[9px] px-1 rounded bg-emerald-500 text-white font-bold">Live</span>
+                  )}
                 </button>
               ))}
             </div>
