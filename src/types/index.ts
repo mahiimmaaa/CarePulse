@@ -38,7 +38,8 @@ export interface ChatMessage {
   text: string;
   timestamp: number;
   isEmergencyAlert?: boolean;
-  provider?: 'dify' | 'fallback' | 'gemini';
+  provider?: 'chatgpt' | 'dify' | 'fallback' | 'gemini';
+  modelUsed?: string;
 }
 
 export interface Appointment {

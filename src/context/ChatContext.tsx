@@ -8,7 +8,10 @@ interface ChatContextType {
   isLoading: boolean;
   error: string | null;
   conversationId: string | null;
-  provider: 'dify' | 'fallback' | 'gemini' | null;
+  provider: 'chatgpt' | 'dify' | 'fallback' | 'gemini' | null;
+  modelMode: 'fast' | 'detailed';
+  activeModelName: string | null;
+  setModelMode: (mode: 'fast' | 'detailed') => void;
   openChat: (initialPrompt?: string) => void;
   closeChat: () => void;
   toggleChat: () => void;
@@ -29,6 +32,7 @@ const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
 const STORAGE_KEY_MESSAGES = 'carepulse_chat_messages_v1';
 const STORAGE_KEY_CONV_ID = 'carepulse_chat_conv_id_v1';
+const STORAGE_KEY_MODEL_MODE = 'carepulse_model_mode_v1';
 
 export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [messages, setMessages] = useState<ChatMessage[]>(() => {
@@ -53,14 +57,29 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return null;
   });
 
+  const [modelMode, setModelModeState] = useState<'fast' | 'detailed'>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = sessionStorage.getItem(STORAGE_KEY_MODEL_MODE);
+      if (saved === 'fast' || saved === 'detailed') return saved;
+    }
+    return 'fast';
+  });
+
+  const [activeModelName, setActiveModelName] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [provider, setProvider] = useState<'dify' | 'fallback' | 'gemini' | null>(null);
+  const [provider, setProvider] = useState<'chatgpt' | 'dify' | 'fallback' | 'gemini' | null>(null);
   const [lastUserMessage, setLastUserMessage] = useState<string | null>(null);
 
-  // Sync to sessionStorage
+  const setModelMode = (mode: 'fast' | 'detailed') => {
+    setModelModeState(mode);
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem(STORAGE_KEY_MODEL_MODE, mode);
+    }
+  };
+
   useEffect(() => {
     try {
       sessionStorage.setItem(STORAGE_KEY_MESSAGES, JSON.stringify(messages));
@@ -101,6 +120,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
         body: JSON.stringify({
           message: trimmed,
           conversationId: conversationId || undefined,
+          modelPreference: modelMode,
         }),
       });
 
@@ -118,6 +138,10 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setProvider(data.provider);
       }
 
+      if (data.model_used) {
+        setActiveModelName(data.model_used);
+      }
+
       const assistantMsg: ChatMessage = {
         id: data.message_id || `asst-${Date.now()}`,
         sender: 'assistant',
@@ -125,6 +149,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
         timestamp: Date.now(),
         isEmergencyAlert: data.isEmergencyAlert,
         provider: data.provider,
+        modelUsed: data.model_used,
       };
 
       setMessages((prev) => [...prev, assistantMsg]);
@@ -135,7 +160,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } finally {
       setIsLoading(false);
     }
-  }, [conversationId]);
+  }, [conversationId, modelMode]);
 
   const openChat = useCallback((initialPrompt?: string) => {
     setIsOpen(true);
@@ -184,6 +209,9 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
         error,
         conversationId,
         provider,
+        modelMode,
+        activeModelName,
+        setModelMode,
         openChat,
         closeChat,
         toggleChat,

@@ -14,8 +14,8 @@ import {
   User,
   ShieldAlert,
   Sparkles,
-  ExternalLink,
-  ChevronDown
+  Zap,
+  BrainCircuit
 } from 'lucide-react';
 import { useChat } from '../../context/ChatContext.tsx';
 
@@ -35,6 +35,8 @@ export const ChatbotPanel: React.FC = () => {
     error,
     conversationId,
     provider,
+    modelMode,
+    setModelMode,
     openChat,
     closeChat,
     toggleExpand,
@@ -55,7 +57,6 @@ export const ChatbotPanel: React.FC = () => {
   useEffect(() => {
     if (isOpen) {
       scrollToBottom();
-      // focus input when opened on non-touch devices
       if (window.innerWidth > 768) {
         inputRef.current?.focus();
       }
@@ -132,10 +133,10 @@ export const ChatbotPanel: React.FC = () => {
               <div>
                 <div className="flex items-center gap-2">
                   <h3 className="font-semibold text-sm sm:text-base leading-tight tracking-tight">
-                    CarePulse AI Assistant
+                    CarePulse AI
                   </h3>
                   <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-teal-500/30 text-teal-200 border border-teal-400/30">
-                    {provider === 'dify' ? 'Dify AI' : 'Live Bot'}
+                    {provider === 'chatgpt' ? 'ChatGPT' : provider === 'dify' ? 'Dify AI' : 'Live Bot'}
                   </span>
                 </div>
                 <p className="text-[11px] text-teal-100/80 leading-none mt-0.5">
@@ -170,6 +171,40 @@ export const ChatbotPanel: React.FC = () => {
                 aria-label="Close chat"
               >
                 <X className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Model Mode Switcher Bar */}
+          <div className="bg-slate-100 dark:bg-slate-800/90 border-b border-slate-200 dark:border-slate-700/80 px-3 py-1.5 flex items-center justify-between text-xs">
+            <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              AI Model:
+            </span>
+            <div className="flex items-center gap-1 p-0.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+              <button
+                type="button"
+                onClick={() => setModelMode('fast')}
+                className={`px-2 py-0.5 rounded-md text-[11px] font-semibold flex items-center gap-1 transition-all cursor-pointer ${
+                  modelMode === 'fast'
+                    ? 'bg-teal-600 text-white shadow-xs'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                }`}
+              >
+                <Zap className="w-3 h-3" />
+                <span>Model 1 (Fast Triage)</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setModelMode('detailed')}
+                className={`px-2 py-0.5 rounded-md text-[11px] font-semibold flex items-center gap-1 transition-all cursor-pointer ${
+                  modelMode === 'detailed'
+                    ? 'bg-teal-600 text-white shadow-xs'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                }`}
+              >
+                <BrainCircuit className="w-3 h-3" />
+                <span>Model 2 (Deep Guide)</span>
               </button>
             </div>
           </div>
@@ -231,12 +266,19 @@ export const ChatbotPanel: React.FC = () => {
                           : 'border-slate-100 dark:border-slate-700/60 text-slate-400 dark:text-slate-500'
                       }`}
                     >
-                      <span>
-                        {new Date(msg.timestamp).toLocaleTimeString([], {
-                          hour: '2-digit',
-                          minute: '2-digit',
-                        })}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <span>
+                          {new Date(msg.timestamp).toLocaleTimeString([], {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                          })}
+                        </span>
+                        {msg.modelUsed && !isUser && (
+                          <span className="px-1.5 py-0.2 rounded bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-300">
+                            {msg.modelUsed}
+                          </span>
+                        )}
+                      </div>
 
                       {!isUser && (
                         <button
@@ -271,7 +313,7 @@ export const ChatbotPanel: React.FC = () => {
                 </div>
                 <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl rounded-tl-xs px-4 py-3 shadow-sm flex items-center gap-1.5">
                   <span className="text-xs text-slate-500 dark:text-slate-400 mr-1 font-medium">
-                    Consulting medical knowledge
+                    {modelMode === 'detailed' ? 'Consulting deep medical model...' : 'Consulting triage model...'}
                   </span>
                   <div className="flex items-center gap-1">
                     <div className="w-2 h-2 rounded-full bg-teal-600 animate-bounce [animation-delay:-0.3s]"></div>

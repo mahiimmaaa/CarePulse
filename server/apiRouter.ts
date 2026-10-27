@@ -250,7 +250,7 @@ apiRouter.post('/chat', async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    const { message, conversationId, userId } = req.body;
+    const { message, conversationId, userId, modelPreference } = req.body;
 
     if (!message || typeof message !== 'string' || message.trim().length === 0) {
       res.status(400).json({
@@ -272,6 +272,7 @@ apiRouter.post('/chat', async (req: Request, res: Response): Promise<void> => {
       message,
       conversationId,
       userId,
+      modelPreference,
     });
 
     res.json({
@@ -281,6 +282,7 @@ apiRouter.post('/chat', async (req: Request, res: Response): Promise<void> => {
       message_id: result.message_id,
       created_at: result.created_at,
       provider: result.provider,
+      model_used: result.model_used,
       isEmergencyAlert: result.isEmergencyAlert,
     });
   } catch (err: unknown) {
