@@ -1,0 +1,6 @@
+{
+  "name": "CarePulse Healthcare",
+  "description": "Practo-inspired healthcare platform with doctor discovery, appointment booking, lab tests, and an interactive AI healthcare assistant.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
